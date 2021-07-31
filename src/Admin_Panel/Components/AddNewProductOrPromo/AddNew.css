@@ -1,0 +1,97 @@
+.login-container form,
+.add-new-promp-container form, 
+.add-new-product-container form {
+    width:300px;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px lightgray;
+    background-color: white;
+    margin-bottom:30px;
+}
+.add-new-promp-container form input::placeholder, 
+.add-new-product-container form input::placeholder{
+    color:#CBCBCB;
+}
+.img-uploader{
+    width:100%;
+    height: 170px;
+    margin-bottom: 20px;
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+#img-input{display:none}
+
+.login-container form input,
+.add-new-promp-container form input, 
+.add-new-product-container form input{
+    width:100%;
+    border:1px solid lightgray;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.login-container form label,
+.add-new-promp-container form label, 
+.add-new-product-container form label{
+    margin-bottom: 5px;
+}
+.sign-up-btn,
+.add-new-promo-btn, 
+.add-new-product-btn{
+    background-color: yellow;
+    border:none;
+    border-radius: 50px;
+    padding: 7px 30px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 26px;
+    color:rgb(177, 177, 177);
+}
+.switch input {
+  display: none;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "No";
+    height: 24px;
+    width: 35px;
+    font-size: 14px;
+    text-align: center;
+    right: 0;
+    bottom: 0;
+    color: white;
+    background-color: #EF0031;
+    -webkit-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider:before {
+    background-color: #00B55B;
+    content: "Yes";
+  -webkit-transform: translateX(-34px);
+  -ms-transform: translateX(-34px);
+  transform: translateX(-34px);
+}
+.slider.round {
+  border-radius: 20px;
+}
+.slider.round:before {
+  border-radius: 20px;
+}

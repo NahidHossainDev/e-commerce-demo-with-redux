@@ -1,0 +1,43 @@
+nav li{
+    list-style: none;
+    padding:5px 15px;
+    color:#202020;
+}
+nav .active,
+nav li:hover{
+    background-color: #ecf2ff;
+    color:black;
+    border-radius: 5px;
+    transform: translateX(10px);
+    font-weight: 600;
+    transition: 0.20s;
+    cursor: pointer;
+}
+nav .active{
+    border-left:3px solid black;
+    background-color: #ecf2ff;
+}
+nav li img{
+    margin-right:30px;
+    width:1rem;
+}
+.mobile-menu-btn{
+  visibility: hidden;
+}
+.MuiDrawer-paper{
+    background-color: #4a5dca !important;
+    width: 60%;
+    padding-top: 50px;
+}
+.MuiAccordionDetails-root {
+    display:block !important;
+}
+.MuiAccordionSummary-content,
+.MuiAccordion-root.Mui-expanded,
+.MuiAccordionSummary-content.Mui-expanded {
+    margin: 0 !important;
+}
+.MuiAccordionSummary-root.Mui-expanded,
+.MuiAccordionSummary-root{min-height: 30px !important;}
+.MuiPaper-elevation1 {box-shadow: none !important;}
+.MuiAccordion-root:before {height: 0 !important;}

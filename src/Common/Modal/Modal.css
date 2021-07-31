@@ -1,0 +1,10 @@
+.MuiDialog-paperScrollPaper{
+    padding:30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width:275px;
+}
+.MuiDialog-paperScrollPaper svg{
+    margin-bottom: 20px;
+}

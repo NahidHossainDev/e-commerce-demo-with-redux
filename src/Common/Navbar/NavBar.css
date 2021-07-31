@@ -1,0 +1,51 @@
+.navbar{
+    background: white;
+    box-shadow: 3px 0 6px lightgray;
+    color:black;
+    position:sticky;
+    top:0;
+    z-index: 9999;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+    font-weight: 500;
+}
+.logo{
+    height: 50px;
+    width: 110px;
+}
+.search-box{
+    border-bottom: 2px solid #ECECEC;
+    width: 510px;
+    height: fit-content;
+    align-self: center;
+    margin-right:30px;
+}
+.search-box .search-icon{
+    color:#999999;
+    font-size: 23px;
+}
+.search-box input{
+    font-size: 16px;
+    border:none;
+    outline: none;
+    padding-left: 5px;
+    width:95%;
+    font-family: Segoe UI;
+}
+.search-box input,
+.search-box input::placeholder{
+    color:#CBCBCB;
+}
+
+.MuiChip-labelSmall {
+    box-shadow: none;
+    background-color: #FFEE00;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 3px 8px;
+}
+.MuiChip-root{
+    background-color: none;
+}
