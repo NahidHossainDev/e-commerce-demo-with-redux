@@ -6,8 +6,7 @@ import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined"
 import Chip from "@material-ui/core/Chip";
 import { Link, useLocation } from "react-router-dom";
 import { ContextElement } from "../../App";
-import LoginModal from "../../Client_Site/Pages/LoginModal";
-
+import LoginModal from "../../Client_Site/Components/LoginModal"
 const NavBar = () => {
   const location = useLocation();
   const [cart, setCart, loginInfo, setLoginInfo] = useContext(ContextElement);
@@ -17,8 +16,8 @@ const NavBar = () => {
     case "/cartPage":
       document.title = "E-commerce | Cart";
       break;
-    case "/loginPage":
-      document.title = "E-commerce | Log-in";
+    case "/adminLoginPage":
+      document.title = "E-commerce | Admin Log-in";
       break;
     default:
       document.title = "E-commerce | Home";
@@ -74,7 +73,6 @@ const NavBar = () => {
                 <Link className="nav-link" to="/adminLoginPage">
                   <PersonOutlineOutlinedIcon />
                   {loginInfo.adminLoginData.userId || admin}
-                  
                 </Link>
               </li>
             )}

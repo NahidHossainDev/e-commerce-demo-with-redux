@@ -19,9 +19,9 @@ const Home = () => {
    if (!isAddaded) {
      data.quantity = 1;
      setCart([...cart, data]);
-     const sessionData = sessionStorage.getItem("cart")
-     const newSessionData = sessionData ? [...sessionData, data.id] : [data.id] ;
-     sessionStorage.setItem("cart", JSON.stringify(newSessionData));
+     //  const sessionData = sessionStorage.getItem("cart")
+     //  const newSessionData = sessionData ? [...sessionData, {id:data.id,quantity:1}] : [{id:data.id,quantity:1}] ;
+     //  sessionStorage.setItem("cart", JSON.stringify(newSessionData));
    }
   }
     return (

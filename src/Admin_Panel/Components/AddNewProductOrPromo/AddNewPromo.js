@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from "../../../Common/Modal/Modal";
 
 const PromotionPage = ({ editPromoData, setEditPromoData }) => {
@@ -36,14 +36,12 @@ const PromotionPage = ({ editPromoData, setEditPromoData }) => {
       info.createdDate = new Date().toLocaleString();
       info.uses = 0;
       apiMethod = "POST";
-      api = "http://localhost:8000/addNewPromoCode";
+      api = "https://polar-taiga-14247.herokuapp.com/addNewPromoCode";
       modalText = "Promo code added successfully";
-
     } else {
-      api = `http://localhost:8000/updatePromoCode/${info._id}`;
+      api = `https://polar-taiga-14247.herokuapp.com/updatePromoCode/${info._id}`;
       apiMethod = "PATCH";
       modalText = "Promo code updated successfully";
-
     }
 
     fetch(api, {

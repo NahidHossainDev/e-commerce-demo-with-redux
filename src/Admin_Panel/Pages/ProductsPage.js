@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import ProductCard from '../../Common/ProductCard/ProductCard';
@@ -7,7 +7,7 @@ const ProductsPage = () => {
      const [products, setProducts] = useState([]);
       const history = useHistory()
      useEffect(() => {
-       fetch("http://localhost:8000/getProducts")
+       fetch("https://polar-taiga-14247.herokuapp.com/getProducts")
          .then((res) => res.json())
          .then((data) => setProducts(data));
      }, []);

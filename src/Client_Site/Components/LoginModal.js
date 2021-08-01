@@ -1,13 +1,20 @@
 import Dialog from "@material-ui/core/Dialog";
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "../../Admin_Panel/Components/AddNewProductOrPromo/AddNew.css";
 import { ContextElement } from "../../App";
 import firebase from "../../firebase";
 
-const LoginModal = ({ open, setOpen, setMessage }) => {
+const LoginModal = ({ open, setOpen,frmOrderPage, setMessage }) => {
   const [cart, setCart, loginInfo, setLoginInfo] = useContext(ContextElement);
   const [showOtpInput, setShowOtpInput] = useState(false);
-  let userName = " ";
+  const [info, setInfo] = useState({});
+  const [disableInp, setDisableInp] = useState(false)
+
+  const handleOnChange = (e) => {
+    const newInfo = { ...info };
+      newInfo[e.target.name] = e.target.value;
+      setInfo(newInfo);
+  };
 
   const setUpRecaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -19,14 +26,12 @@ const LoginModal = ({ open, setOpen, setMessage }) => {
   const onSignInSubmit = async (e) => {
     e.preventDefault();
 
-    userName = document.getElementById("userName").value;
-    const phoneNumber = document.getElementById("phoneNumber").value;
-    
+    setDisableInp(true);
     setUpRecaptcha();
     const appVerifier = window.recaptchaVerifier;
     firebase
       .auth()
-      .signInWithPhoneNumber(phoneNumber, appVerifier)
+      .signInWithPhoneNumber(info.phoneNumber, appVerifier)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         setShowOtpInput(true)
@@ -34,6 +39,7 @@ const LoginModal = ({ open, setOpen, setMessage }) => {
         // Error; SMS not sent
         console.log(error);
       });
+    setDisableInp(false);
   };
 
   const SubmitOtp = () => {
@@ -45,8 +51,9 @@ const LoginModal = ({ open, setOpen, setMessage }) => {
         // User signed in successfully.
         const newData = { ...loginInfo };
         newData.userLoginData.phoneNumber = result.user.phoneNumber;
-        newData.userLoginData.userName = userName;
-        sessionStorage.setItem("user_name", userName);
+        newData.userLoginData.userName = info.userName;
+        sessionStorage.setItem("user_name", info.userName);
+        frmOrderPage && setMessage(null);
         setLoginInfo(newData);
         setOpen(false);
         setShowOtpInput(false);
@@ -76,18 +83,31 @@ const LoginModal = ({ open, setOpen, setMessage }) => {
           <label htmlFor="phnNumber" className="mb-1">
             Name
           </label>
-          <input type="text" id="userName" className="w-100" required />
+          <input
+            type="text"
+            name="userName"
+            className="w-100"
+            disabled={disableInp}
+            onChange={(e) => handleOnChange(e)}
+            required
+          />
           <label htmlFor="phnNumber" className="mb-1">
             Phone Number <small>(with country code)</small>
           </label>
           <input
             type="text"
             placeholder="+880..."
-            id="phoneNumber"
+            name="phoneNumber"
+            disabled={disableInp}
             className="w-100"
+            onChange={(e) => handleOnChange(e)}
             required
           />
-          <button type="submit" className="sign-up-btn mt-3">
+          <button
+            type="submit"
+            className="sign-up-btn mt-3"
+            disabled={disableInp}
+          >
             Sign up
           </button>
         </form>

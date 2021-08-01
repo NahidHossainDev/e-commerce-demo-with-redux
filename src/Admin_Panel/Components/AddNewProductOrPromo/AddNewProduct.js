@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Resizer from "react-image-file-resizer";
 import { useHistory } from 'react-router';
 import Modal from "../../../Common/Modal/Modal";
 import "./AddNew.css";
@@ -8,7 +7,6 @@ const AddNewProduct = () => {
   const history = useHistory();
   const [openModal, setOpenModal] = useState(false);
   const [info, setInfo] = useState({});
-  const [file, setFile] = useState({});
   const [modalData, setModalData] = useState(`Please Wait...! Thanks for your patience.`);
 
   const handleOnBlur = (e) =>  {
@@ -34,7 +32,7 @@ const AddNewProduct = () => {
     }
 
     setOpenModal(true);
-    fetch("http://localhost:8000/addNewProduct", {
+    fetch("https://polar-taiga-14247.herokuapp.com/addNewProduct", {
       method: "POST",
       body: formData,
     })
@@ -69,7 +67,7 @@ const AddNewProduct = () => {
                 </span>}
             
             </p>
-            <input type="file" name="file" id="img-input" onChange={handleOnChange} />
+            <input type="file" name="file" id="img-input" onChange={handleOnChange} required />
           </div>
           <label htmlFor="productName">Product Name</label>
           <input
@@ -79,7 +77,7 @@ const AddNewProduct = () => {
             required
           />
           <label htmlFor="price">Product Price (Before Discount)</label>
-          <input type="number" name="price" onBlur={handleOnBlur}  />
+          <input type="number" name="price" onBlur={handleOnBlur} required />
           <label htmlFor="discountRate">Discount Rate</label>
           <input
             type="number"

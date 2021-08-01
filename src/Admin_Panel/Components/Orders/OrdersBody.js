@@ -1,11 +1,11 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
-import "./Orders.css"
+import "./Orders.css";
 const OrdersBody = ({ ordersData, fetchDataMethod }) => {
 
   const statusUpdater = (id, status) => {
-    fetchDataMethod(`http://localhost:8000/updateOrderStatus/${id}`, "PATCH", {status: status });
-    fetchDataMethod("http://localhost:8000/getOrdersData", "POST", {status:status});
+    fetchDataMethod(`https://polar-taiga-14247.herokuapp.com/updateOrderStatus/${id}`, "PATCH", {status: status });
+    fetchDataMethod("https://polar-taiga-14247.herokuapp.com/getOrdersData", "POST", {status:status});
   }
    
   return (

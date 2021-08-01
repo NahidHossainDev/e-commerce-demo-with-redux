@@ -6,13 +6,6 @@ const PrivateRouter = ({ children, ...rest }) => {
 
   const [cart, setCart, loginInfo, setLoginInfo] = useContext(ContextElement);
 
-  // const sessionData = sessionStorage.getItem("admin_user_id");
-  // if (sessionData) {
-  //    const newData = { ...loginInfo };
-  //    newData.adminLoginData.userId = sessionData;
-  //    setLoginInfo(newData);
-  // }
-
   return (
     <Route
       {...rest}

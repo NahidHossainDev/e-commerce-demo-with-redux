@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
+import { Link, useHistory } from 'react-router-dom';
 
 const PromoCodesPage = ({ setEditPromoData }) => {
 
@@ -8,7 +8,7 @@ const PromoCodesPage = ({ setEditPromoData }) => {
   const location = useHistory();
 
   useEffect(() => {
-    fetch("http://localhost:8000/getPromoCode")
+    fetch("https://polar-taiga-14247.herokuapp.com/getPromoCode")
       .then((res) => res.json())
       .then((data) => setPromoCode(data));
   }, []);

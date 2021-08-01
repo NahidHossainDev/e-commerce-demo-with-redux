@@ -7,7 +7,7 @@ const ProductCard = ({ data, addToCartHandler, isAdmin }) => {
   return (
     <div className={`card product-card p-3 ${!isAdmin && "product-hover"}`}>
       {isAdmin ?  <img src={`data:image/png;base64,${image}`} alt="" /> : <img src={image} alt={title} /> }
-      <p>{title}</p>
+      <p>{title || data.productName}</p>
       <div className="card-foo">
         <strong>BDT.{price}</strong>
         <div className="discount-rate">10%</div>

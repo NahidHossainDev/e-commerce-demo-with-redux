@@ -9,7 +9,6 @@ import Home from './Client_Site/Pages/Home';
 import NavBar from "./Common/Navbar/NavBar";
 
 export const ContextElement = createContext();
-export const UserContext = createContext();
 
 function App() {
   const [cart, setCart] = useState([])
@@ -28,7 +27,6 @@ function App() {
             <PrivateRoute path="/admin">
               <AdminPanel />
             </PrivateRoute>
-
             <Route path="/adminLoginPage">
               <AdminLogIn />
             </Route>

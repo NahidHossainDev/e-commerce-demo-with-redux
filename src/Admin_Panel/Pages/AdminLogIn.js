@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { ContextElement } from "../../App";
 
@@ -17,10 +17,11 @@ const AdminLogIn = () => {
     newInfo[e.target.name] = e.target.value;
     setInfo(newInfo);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:8000/checkAdmin", {
+    fetch("https://polar-taiga-14247.herokuapp.com/checkAdmin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: info.userId }),
@@ -32,7 +33,6 @@ const AdminLogIn = () => {
   };
   const isAdmin = (data) => {
     if (info.password === data.password) {
-      console.log("login success!")
       sessionStorage.setItem("admin_user_id",data.userId)
       const newData = { ...loginInfo }
       newData.adminLoginData = data;

@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState, } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ContextElement } from '../../../App';
-import LoginModal from '../../Pages/LoginModal';
+import LoginModal from '../LoginModal';
 
 const Order_Summery = ({ setCheckoutDetail }) => {
 
@@ -46,7 +46,7 @@ const Order_Summery = ({ setCheckoutDetail }) => {
       setLoadingPromo(true);
       const code = document.getElementById("promoInput").value;
 
-      fetch("http://localhost:8000/checkPromoCode", {
+      fetch("https://polar-taiga-14247.herokuapp.com/checkPromoCode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ promoCode: code }),
@@ -58,8 +58,6 @@ const Order_Summery = ({ setCheckoutDetail }) => {
     } else {
       setMessage("You must log in before using Promo Code !");
     }
-
-    
   };
 
   // Checking discount
@@ -150,6 +148,7 @@ const Order_Summery = ({ setCheckoutDetail }) => {
       <LoginModal
         open={openModal}
         setOpen={setOpenModal}
+        frmOrderPage = {true}
         setMessage={setMessage}
       />
       <table className="table mb-0 pb-2">

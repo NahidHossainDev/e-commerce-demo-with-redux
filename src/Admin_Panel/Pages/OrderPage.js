@@ -33,10 +33,10 @@ const OrderPage = () => {
     };
 
     useEffect(() => {
-      all && fetchDataMethod("http://localhost:8000/getOrdersData", "POST", {});
-      pending && fetchDataMethod("http://localhost:8000/getOrdersData", "POST", {status:"Pending"});
-      confirmed && fetchDataMethod("http://localhost:8000/getOrdersData", "POST", {status:"Confirm"});
-      cancel && fetchDataMethod("http://localhost:8000/getOrdersData", "POST", {status:"Cancel"});
+      all && fetchDataMethod("https://polar-taiga-14247.herokuapp.com/getOrdersData", "POST", {});
+      pending && fetchDataMethod("https://polar-taiga-14247.herokuapp.com/getOrdersData", "POST", {status:"Pending"});
+      confirmed && fetchDataMethod("https://polar-taiga-14247.herokuapp.com/getOrdersData", "POST", {status:"Confirm"});
+      cancel && fetchDataMethod("https://polar-taiga-14247.herokuapp.com/getOrdersData", "POST", {status:"Cancel"});
     }, [change]);
 
     return (

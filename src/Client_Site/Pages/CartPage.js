@@ -9,7 +9,7 @@ import Order_Summery from '../Components/Order_Summery/Order_Summery';
 
 const CartPage = () => {
 
-  const [cart, setCart, count, setCount] = useContext(ContextElement)
+  const [cart, setCart] = useContext(ContextElement)
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
   const [error, setError] = useState(null);
   const [checkoutDetail, setCheckoutDetail] = useState();
