@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, useLocation } from 'react-router-dom';
 import AddNewProduct from '../Components/AddNewProductOrPromo/AddNewProduct';
 import NavBarAdminPanel from '../Components/MenuBar/NavBarAdminPanel';
 import OrderPage from './OrderPage';
@@ -10,6 +10,7 @@ import PromoCodesPage from './PromoCodesPage';
 
 const AdminPanel = () => {
   document.title = "E-commerce | Admin Panel";
+  const location = useLocation();
 
   const [editPromoData, setEditPromoData] = useState(null);
 
@@ -19,6 +20,7 @@ const AdminPanel = () => {
           <NavBarAdminPanel />
         </div>
         <div className="col-md-10 pt-4 main-body">
+          {location.pathname === "/admin" && <h2>Welcome to admin panel</h2>}
           <Route path="/admin/products">
             <ProductsPage />
           </Route>

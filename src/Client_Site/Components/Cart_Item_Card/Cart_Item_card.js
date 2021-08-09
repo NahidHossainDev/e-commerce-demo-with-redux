@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React  from 'react';
+import { useDispatch } from "react-redux";
+import { adjustQuantity, removeFromCart } from "../../../redux/Cart/cartAction";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 
-const Cart_Item_card = ({ data, updateQuantity, deleteFromCart }) => {
+const Cart_Item_card = ({ data }) => {
   const { id, image, price, title, quantity } = data;
 
   const totalPrice = (quantity * price).toFixed(2);
+
+  const dispatch = useDispatch()
 
   return (
     <div className="p-3 border-bottom  d-flex">
@@ -21,7 +25,7 @@ const Cart_Item_card = ({ data, updateQuantity, deleteFromCart }) => {
           <DeleteForeverOutlinedIcon
             className="ml-auto"
             style={{ cursor: "pointer" }}
-            onClick={() => deleteFromCart(id)}
+            onClick={() => dispatch(removeFromCart(id))}
           />
         </div>
         <div className="row mt-2">
@@ -38,18 +42,18 @@ const Cart_Item_card = ({ data, updateQuantity, deleteFromCart }) => {
               Quantity:
               <div className="rounded-pill border min-w-50 ml-2 d-flex justify-content-between align-items-center">
                 <button
-                  className="border-0 bg-white py-0 px-2 rounded-pill"
-                  onClick={() => updateQuantity(id, quantity + 1)}
-                >
-                  +
-                </button>
-                {quantity}
-                <button
                   className="border-0 bg-white  py-0 px-2 rounded-pill"
-                  onClick={() => updateQuantity(id, quantity - 1)}
+                  onClick={() => dispatch(adjustQuantity(id, quantity - 1))}
                   disabled={quantity < 2}
                 >
                   -
+                </button>
+                {quantity}
+                <button
+                  className="border-0 bg-white py-0 px-2 rounded-pill"
+                  onClick={() => dispatch(adjustQuantity(id, quantity + 1))}
+                >
+                  +
                 </button>
               </div>
             </div>

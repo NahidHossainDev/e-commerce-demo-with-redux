@@ -1,14 +1,17 @@
 import Dialog from "@material-ui/core/Dialog";
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { userLogin } from "../../redux/Login/loginAction";
 import "../../Admin_Panel/Components/AddNewProductOrPromo/AddNew.css";
-import { ContextElement } from "../../App";
 import firebase from "../../firebase";
 
-const LoginModal = ({ open, setOpen,frmOrderPage, setMessage }) => {
-  const [cart, setCart, loginInfo, setLoginInfo] = useContext(ContextElement);
+const LoginModal = ({ open, setOpen, frmOrderPage, setMessage }) => {
+  
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [info, setInfo] = useState({});
   const [disableInp, setDisableInp] = useState(false)
+
+  const dispatch = useDispatch(state => state.userLoginData);
 
   const handleOnChange = (e) => {
     const newInfo = { ...info };
@@ -47,14 +50,13 @@ const LoginModal = ({ open, setOpen,frmOrderPage, setMessage }) => {
     window.confirmationResult
       .confirm(otpInput)
       .then((result) => {
-        console.log(result.user);
         // User signed in successfully.
-        const newData = { ...loginInfo };
-        newData.userLoginData.phoneNumber = result.user.phoneNumber;
-        newData.userLoginData.userName = info.userName;
-        sessionStorage.setItem("user_name", info.userName);
+        const loginData = {
+          userName: info.userName,
+          phoneNumber: result.user.phoneNumber,
+        };
+        dispatch(userLogin(loginData));
         frmOrderPage && setMessage(null);
-        setLoginInfo(newData);
         setOpen(false);
         setShowOtpInput(false);
       })

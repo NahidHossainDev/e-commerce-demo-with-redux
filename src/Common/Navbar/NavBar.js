@@ -1,17 +1,25 @@
-import React, { useContext, Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./NavBar.css"
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
 import Chip from "@material-ui/core/Chip";
 import { Link, useLocation } from "react-router-dom";
-import { ContextElement } from "../../App";
 import LoginModal from "../../Client_Site/Components/LoginModal"
+import {useSelector} from "react-redux";
+
 const NavBar = () => {
+
   const location = useLocation();
-  const [cart, setCart, loginInfo, setLoginInfo] = useContext(ContextElement);
   const [openModal, setOpenModal] = useState(false);
 
+  //Getting data from redux
+  const userCredential = useSelector((state) => state.userLoginData);
+  const adminCredential = useSelector((state) => state.adminLoginData);
+  const cartItem = useSelector(state => state.cart.cartItem);
+  const getCartCounter = cartItem.reduce((val, item) => val + item.quantity, 0)
+
+ 
   switch (location.pathname) {
     case "/cartPage":
       document.title = "E-commerce | Cart";
@@ -22,9 +30,6 @@ const NavBar = () => {
     default:
       document.title = "E-commerce | Home";
   }
-
-  const user = sessionStorage.getItem("user_name");
-  const admin = sessionStorage.getItem("admin_user_id");
 
   return (
     <nav className="navbar navbar-expand-lg p-0 navbar-light">
@@ -54,7 +59,7 @@ const NavBar = () => {
                 <li className="nav-item my-auto mx-2">
                   <Link className="nav-link" to="/cartPage">
                     <ShoppingCartOutlinedIcon /> Cart
-                    <Chip size="small" label={cart.length} />
+                    <Chip size="small" label={getCartCounter} />
                   </Link>
                 </li>
                 <LoginModal open={openModal} setOpen={setOpenModal} />
@@ -63,8 +68,8 @@ const NavBar = () => {
                   onClick={() => setOpenModal(true)}
                 >
                   <PersonOutlineOutlinedIcon />
-                  {loginInfo.userLoginData
-                    ? (loginInfo.userLoginData.userName || user)
+                  {userCredential.isLogin
+                    ? userCredential.userName
                     : "LogIn"}
                 </li>
               </Fragment>
@@ -72,7 +77,7 @@ const NavBar = () => {
               <li className="nav-item">
                 <Link className="nav-link" to="/adminLoginPage">
                   <PersonOutlineOutlinedIcon />
-                  {loginInfo.adminLoginData.userId || admin}
+                  {adminCredential.adminId}
                 </Link>
               </li>
             )}

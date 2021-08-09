@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ContextElement } from '../../../App';
+import React, { useEffect, useState } from 'react';
 import LoginModal from '../LoginModal';
+import { useSelector } from "react-redux";
 
 const Order_Summery = ({ setCheckoutDetail }) => {
 
-  const [cart, setCart, loginInfo] = useContext(ContextElement);
-
+  const cart = useSelector(state => state.cart.cartItem);
+  const userCredential = useSelector((state) => state.userLoginData);
+  
   const [openModal, setOpenModal] = useState(false);
   const [discountRate, setDiscountRate] = useState(0);
   const [message, setMessage] = useState(null);
@@ -33,15 +34,14 @@ const Order_Summery = ({ setCheckoutDetail }) => {
 
 
   //check is user Login?
-  const userName = sessionStorage.getItem("user_name");
   const handleOnFocus = () => {
-     !userName && setOpenModal(true)
+     !userCredential.isLogin && setOpenModal(true);
   };
 
 
   //fetching promoCode data
   const handleApplyPromo = () => {
-    if ( userName) {
+    if (userCredential.isLogin) {
       setDiscountRate(0);
       setLoadingPromo(true);
       const code = document.getElementById("promoInput").value;

@@ -1,35 +1,24 @@
-import React,{useContext, useEffect, useState} from 'react';
+import React,{ useEffect, useState} from 'react';
 import { useHistory } from 'react-router';
-import { ContextElement } from '../../App';
 import Modal from '../../Common/Modal/Modal';
 import Cart_Item_card from "../Components/Cart_Item_Card/Cart_Item_card";
 import Order_Summery from '../Components/Order_Summery/Order_Summery';
-// Some style property used from App.css;
+import { useSelector, useDispatch } from "react-redux";
+import { resetCart } from "../../redux/Cart/cartAction";
 
+// Some style property used from App.css;
 
 const CartPage = () => {
 
-  const [cart, setCart] = useContext(ContextElement)
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
   const [error, setError] = useState(null);
   const [checkoutDetail, setCheckoutDetail] = useState();
   const [openModal, setOpenModal] = useState(false);
-  const history = useHistory();
   
+  const history = useHistory();
  
-  //update item quantity;
-  const updateQuantity = (id, newQuantity) =>{
-    const newArray = [...cart];
-    newArray.forEach((d) => {
-      if(d.id === id){d.quantity = newQuantity}
-    })
-    setCart(newArray);
-  }
-
-  // delete item form cart;
-  const deleteFromCart = (id) => {
-    setCart(cart.filter((d) => d.id !== id));
-  };
+  const cart = useSelector(state => state.cart.cartItem)
+  const dispatch = useDispatch();
 
   // order submit to database;
   const fetchDataMethod = (api, apiMethod, info) => {
@@ -43,7 +32,7 @@ const CartPage = () => {
         if (data) {
           if(apiMethod === "POST") {
             setOpenModal(true);
-            setCart([])
+            dispatch(resetCart());
          };
         }
       });
@@ -71,7 +60,8 @@ const CartPage = () => {
             { uses: checkoutDetail.promoUses }
           );
      }
-   };
+  };
+  
     return (
       <div className="container py-3">
         <button
@@ -91,8 +81,7 @@ const CartPage = () => {
               cart.map((d, i) => (
                 <Cart_Item_card
                   data={d}
-                  updateQuantity={updateQuantity}
-                  deleteFromCart={deleteFromCart}
+                  // deleteFromCart={deleteFromCart}
                   key={i}
                 />
               ))

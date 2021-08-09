@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { ContextElement } from "../../../App";
+import { useSelector } from "react-redux";
 
 const PrivateRouter = ({ children, ...rest }) => {
 
-  const [cart, setCart, loginInfo, setLoginInfo] = useContext(ContextElement);
+  const adminCredential = useSelector((state) => state.adminLoginData);
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        loginInfo.adminLoginData.userId || sessionStorage.getItem("admin_user_id") ? (
+        adminCredential.isLogin ? (
           children
         ) : (
           <Redirect
